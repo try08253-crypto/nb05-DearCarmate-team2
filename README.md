@@ -102,7 +102,41 @@
 
 ## 📁 파일 구조
 
-<pre> ```bash src ┣ config ┃ ┗ db.ts ┣ controllers ┃ ┣ auth.controller.ts ┃ ┗ user.controller.ts ┣ middleware ┃ ┣ auth.middleware.ts ┃ ┗ error.middleware.ts ┣ models ┃ ┣ user.model.ts ┃ ┗ course.model.ts ┣ routes ┃ ┣ auth.routes.ts ┃ ┗ user.routes.ts ┣ services ┃ ┣ auth.service.ts ┃ ┗ user.service.ts ┣ utils ┃ ┣ jwt.ts ┃ ┣ constants.ts ┃ ┗ logger.ts ┣ app.ts ┗ server.ts prisma ┣ schema.prisma ┗ seed.ts .env .gitignore package.json tsconfig.json README.md ``` </pre>
+<pre>
+src
+ ┣ config
+ ┃ ┗ db.ts
+ ┣ controllers
+ ┃ ┣ auth.controller.ts
+ ┃ ┗ user.controller.ts
+ ┣ middleware
+ ┃ ┣ auth.middleware.ts
+ ┃ ┗ error.middleware.ts
+ ┣ models
+ ┃ ┣ user.model.ts
+ ┃ ┗ course.model.ts
+ ┣ routes
+ ┃ ┣ auth.routes.ts
+ ┃ ┗ user.routes.ts
+ ┣ services
+ ┃ ┣ auth.service.ts
+ ┃ ┗ user.service.ts
+ ┣ utils
+ ┃ ┣ jwt.ts
+ ┃ ┣ constants.ts
+ ┃ ┗ logger.ts
+ ┣ app.ts
+ ┗ server.ts
+prisma
+ ┣ schema.prisma
+ ┗ seed.ts
+.env
+.gitignore
+package.json
+tsconfig.json
+README.md
+</pre>
+
 
 ---
 ## 🌐 구현 홈페이지

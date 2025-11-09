@@ -103,32 +103,32 @@
 ## 📁 파일 구조
 
 src
- ┣ config
- ┃ ┗ db.ts
- ┣ controllers
- ┃ ┣ auth.controller.ts
- ┃ ┗ user.controller.ts
- ┣ middleware
- ┃ ┣ auth.middleware.ts
- ┃ ┗ error.middleware.ts
- ┣ models
- ┃ ┣ user.model.ts
- ┃ ┗ course.model.ts
- ┣ routes
- ┃ ┣ auth.routes.ts
- ┃ ┗ user.routes.ts
- ┣ services
- ┃ ┣ auth.service.ts
- ┃ ┗ user.service.ts
- ┣ utils
- ┃ ┣ jwt.ts
- ┃ ┣ constants.ts
- ┃ ┗ logger.ts
- ┣ app.ts
- ┗ server.ts
+┣ config
+┃ ┗ db.ts
+┣ controllers
+┃ ┣ auth.controller.ts
+┃ ┗ user.controller.ts
+┣ middleware
+┃ ┣ auth.middleware.ts
+┃ ┗ error.middleware.ts
+┣ models
+┃ ┣ user.model.ts
+┃ ┗ course.model.ts
+┣ routes
+┃ ┣ auth.routes.ts
+┃ ┗ user.routes.ts
+┣ services
+┃ ┣ auth.service.ts
+┃ ┗ user.service.ts
+┣ utils
+┃ ┣ jwt.ts
+┃ ┣ constants.ts
+┃ ┗ logger.ts
+┣ app.ts
+┗ server.ts
 prisma
- ┣ schema.prisma
- ┗ seed.ts
+┣ schema.prisma
+┗ seed.ts
 .env
 .gitignore
 package.json

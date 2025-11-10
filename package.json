@@ -1,0 +1,20 @@
+{
+  "name": "nb05-cardeermate-team2",
+  "version": "1.0.0",
+  "description": "NB 5기 2팀 프로젝트 - CardeerMate",
+  "homepage": "https://github.com/try08253-crypto/nb05-xxxx-team2#readme",
+  "bugs": {
+    "url": "https://github.com/try08253-crypto/nb05-xxxx-team2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/try08253-crypto/nb05-xxxx-team2.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    
+  }
+}

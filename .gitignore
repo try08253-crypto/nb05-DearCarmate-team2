@@ -64,5 +64,6 @@ pnpm-debug.log*
 .DS_Store
 
 
-# migrations
+### prisma ###
+node_modules/.prisma/
 prisma/migrations

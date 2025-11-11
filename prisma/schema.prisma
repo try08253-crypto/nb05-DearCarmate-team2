@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Administrator {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  companies Company[]
+  users     User[]
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String   @unique
+  employeeNumber String
+  phoneNumber    String
+  password       String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+
+  administrator   Administrator @relation(fields: [administratorId], references: [id], onDelete: Cascade)
+  administratorId Int
+}
+
+// model Company {
+//   id          Int      @id @default(autoincrement())
+//   companyName String   @unique
+//   companyCode String   @unique
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   users User[]
+//   //customers Customer[]
+
+//   administrator   Administrator @relation(fields: [administratorId], references: [id], onDelete: Cascade)
+//   administratorId Int
+// }
+
+
+model Company {
+    id               Int          @id                @default(autoincrement())
+    companyName      String       @unique
+    companyCode      String       @unique
+    createdAt        DateTime     @default(now())
+    updatedAt        DateTime     @updatedAt
+    
+    user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId           String
+    userCount        Int
+}
+
+model Customer {
+  id            Int      @id @default(autoincrement())
+  name          String
+  gender        Gender
+  phonNumber    String
+  ageGroup      AgeGroup?
+  region        Region?
+  email         String?
+  memo          String?
+  contractCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company   Company @relation(fidlds: [companyId], references: [id], onDelete: Cascade)
+  companyId Int
+
+  @@index([name])
+  @@index([email])
+  @@index([name, email])
+}
+
+model Car {
+  id           Int         @id @default(autoincrement())
+  number       String      @unique
+  manufacturer String
+  model        String
+  year         Int
+  mileage      Int
+  price        Int
+  accidents    Int          @default(0)
+  description  String?
+  accidentNote String?
+  version      Int          @default(1)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  companyId    Int
+  company      Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([model])
+}
+
+model Contract {
+  id             Int            @id @default(autoincrement())
+  userId         Int
+  carId          Int
+  customerId     Int
+  companyId      Int
+  contractStatus ContractStatus @default(carInspection)
+  resolutionDate DateTime?
+  contractPrice  Int
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car            Car            @relation(fields: [carId], references: [id], onDelete: Cascade)
+  customer       Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  company        Company        @relation(fields: [companyId], references: [id])
+
+  meeting           Meeting[]
+  contractDocuments ContractDocument[]
+}
+
+model Meeting {
+  id         Int      @id @default(autoincrement())
+  contractId Int
+  date       DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  alarm      Alarm[]
+}
+
+model Alarm {
+  id        Int      @id @default(autoincrement())
+  meetingId Int
+  time      DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  meeting Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model ContractDocument {
+  id         Int  @id @default(autoincrement())
+  contractId Int?
+
+  fileName  String
+  filePath  String
+  fileSize  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  contract Contract? @relation(fields: [contractId], references: [id], onDelete: Cascade)
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum AgeGroup {
+  TEN     @map("10대")
+  TWENTY  @map("20대")
+  THIRTY  @map("30대")
+  FOURTY  @map("40대")
+  FIFTY   @map("50대")
+  SIXTY   @map("60대")
+  SEVENTY @map("70대")
+  EIGHTY  @map("80대")
+}
+
+enum Region {
+  Seoul     @map("서울")
+  Gyeonggi  @map("경기")
+  Incheon   @map("인천")
+  Gangwon   @map("강원")
+  Chungbuk  @map("충북")
+  Chungnam  @map("충남")
+  Sejong    @map("세종")
+  Daejeon   @map("대전")
+  Jeonbuk   @map("전북")
+  Jeonnam   @map("전남")
+  Gwangju   @map("광주")
+  Gyeongbuk @map("경북")
+  Gyeongnam @map("경남")
+  Daegu     @map("대구")
+  Ulsan     @map("울산")
+  Busan     @map("부산")
+  Jeju      @map("제주")
+}
+
+enum ContractStatus {
+  carInspection
+  priceNegotiation
+  contractDraft
+  contractSuccessful
+  contractFailed
+}

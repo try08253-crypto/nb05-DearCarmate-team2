@@ -65,5 +65,4 @@ pnpm-debug.log*
 
 
 ### prisma ###
-node_modules/.prisma/
 prisma/migrations

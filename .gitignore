@@ -62,3 +62,7 @@ pnpm-debug.log*
 
 # System files
 .DS_Store
+
+
+# migrations
+./prisma/migrations

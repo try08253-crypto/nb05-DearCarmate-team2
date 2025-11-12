@@ -184,7 +184,7 @@ model Contract {
 
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   car      Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
-  customer Customer @relation(fields: [customerId], references: [id])
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   company  Company  @relation(fields: [companyId], references: [id])
 
   meeting           Meeting[]

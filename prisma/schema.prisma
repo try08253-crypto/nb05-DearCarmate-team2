@@ -27,6 +27,8 @@ model User {
   employeeNumber String
   phoneNumber    String
   password       String
+  imageUrl       String
+  isAdmin        Boolean
   version        Int      @default(1)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -240,7 +242,6 @@ model Dashboard {
 
 enum Cartype {
   SEDAN    @map("세단")
-  COMPACT  @map("컴팩트")
   SUV      @map("SUV")
   KEUN_CHA @map("경차")
 }

@@ -59,8 +59,8 @@ model Company {
 }
 
 enum Gender {
-  male
-  female
+  MALE
+  FEMALE
 }
 
 enum AgeGroup {
@@ -98,20 +98,19 @@ model Customer {
   id            Int       @id @default(autoincrement())
   name          String
   gender        Gender
-  phonNumber    String
+  phoneNumber   String
   ageGroup      AgeGroup?
   region        Region?
-  email         String?
+  email         String
   memo          String?
+  contractCount Int       @default(0)
   version       Int       @default(1)
   createdAt     DateTime  @default(now())
-  contractCount Int       @default(0)
   updatedAt     DateTime  @updatedAt
 
-  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
   companyId Int
-
-  contracts Contract?
+  company   Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  contract  Contract[]
 
   @@index([name])
   @@index([email])
@@ -173,7 +172,7 @@ model Contract {
   id         Int @id @default(autoincrement())
   userId     Int
   carId      Int
-  customerId Int @unique
+  customerId Int
   companyId  Int
 
   contractStatus ContractStatus @default(CAR_INSPECTION)
@@ -185,7 +184,7 @@ model Contract {
 
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   car      Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer Customer @relation(fields: [customerId], references: [id])
   company  Company  @relation(fields: [companyId], references: [id])
 
   meeting           Meeting[]

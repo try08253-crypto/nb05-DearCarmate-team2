@@ -1,6 +1,6 @@
 import { BusinessException } from "../../../4_shared/exceptions/business.exceptions/business.exception";
 import { BusinessExceptions } from "../../../4_shared/exceptions/business.exceptions/exception-info";
-import { IBcryptHashManager } from "../../port/managers/bcrypt-hash.manager";
+import { IBcryptHashUtil } from "../../port/managers/bcrypt-hash.manager.interface";
 
 export type CreateUserData = {
   name: string;
@@ -125,7 +125,7 @@ export class UserEntity {
     employeeNumber: string;
     phoneNumber: string;
     password: string;
-    bcryptHashManager: IBcryptHashManager;
+    bcryptHashManager: IBcryptHashUtil;
   }): Promise<NewUserEntity> {
     const {
       name,
@@ -158,7 +158,7 @@ export class UserEntity {
     password: string;
     imageUrl: string;
     version: number;
-    bcryptHashManager: IBcryptHashManager
+    bcryptHashManager: IBcryptHashUtil
   }): Promise<UpdateUserEntity> {
     const {
       id,
@@ -195,7 +195,7 @@ export class UserEntity {
   }
 
   // password
-  async isPasswordMatch(InputPassword: string, bcryptHashManager: IBcryptHashManager) {
+  async isPasswordMatch(InputPassword: string, bcryptHashManager: IBcryptHashUtil) {
     return await bcryptHashManager.verifyPassword(InputPassword, this._password!);
   }
 

@@ -145,7 +145,7 @@ model Car {
   mileage           Int
   price             Int
   accidentCount     Int             @default(0)
-  description       String?
+  explanation       String?
   accidentDetails   String?
   status            CarStatus       @default(POSSESSION)
   version           Int             @default(1)
